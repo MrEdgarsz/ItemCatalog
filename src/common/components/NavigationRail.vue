@@ -5,8 +5,8 @@ import NavigationItem from './NavigationItem.vue';
 </script>
 
 <template>
-  <div class="container bg-neutral-800 flex flex-col items-center" id="navigationRail">
-    <div class="p-5">
+  <div class="container bg-surface flex flex-col items-center" id="navigationRail">
+    <div class="p-5 pt-12">
       <!--- logo -->
       <img src="@/assets/logo.svg" alt="" class="h-10 w-10">
     </div>
