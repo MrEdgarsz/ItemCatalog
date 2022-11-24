@@ -31,6 +31,11 @@ module.exports = {
         "on-primary": "#003544",
         "primary-container": "#004D62",
         "primary": "#5FD4FD",
+        "surface+1": "#1c2528",
+        "surface+2": "#1e2a2e",
+        "surface+3": "#203035",
+        "surface+4": "#213237",
+        "surface+5": "#22353c"
       },
     },
     fontSize: {
