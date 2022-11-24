@@ -3,5 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <RouterView />
+  <div class="flex flex-row bg-neutral-900 text-neutral-50">
+
+    <RouterView />
+
+  </div>
 </template>
