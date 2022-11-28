@@ -1,21 +1,28 @@
 <script lang="ts" setup>
-defineProps(['title', 'type'])
+import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
+defineProps(['name', 'type', 'description'])
 </script>
 
 <template>
-    <div class="max-w-sm rounded-lg shadow-md bg-surface+1 hover:bg-surface-variant">
+    <div class="max-w-sm rounded-lg shadow-md bg-surface+1 hover:bg-on-surface/[0.08] focus:bg-on-surface/[0.12]">
         <a href="#">
-            <img class="rounded-t-lg max-w-full h-auto" src="../../assets/img/dummy-board-game.png" alt="Dummy board game"/>
+            <img class="rounded-t-lg max-w-full h-auto" src="../../assets/images/product-preview.png" alt="Product preview"/>
         </a>
         <div class="p-5">
             <a href="#">
-                <h5 class="text-2xl font-bold tracking-tight text-white">{{ title }}</h5>
+                <h5 class="text-2xl font-bold tracking-tight text-white">{{ name }}</h5>
                 <p class="mb-2 text-lg text-gray-500">{{ type }}</p>
             </a>
-            <p class="mb-3 font-normal text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <div class="text-right">
-                <button type="button" class="text-black text-sm text-center font-medium rounded-full bg-primary px-5 py-2.5 mr-2 mb-2 hover:bg-primary-container hover:text-white focus:outline-none focus:ring-4 focus:ring-on-primary">Edytuj</button>
-                <button type="button" class="text-sm text-error text-center border border-error font-medium rounded-full px-5 py-2.5  mr-2 mb-2 hover:bg-error-container hover:border-error-container focus:ring-4 focus:outline-none focus:ring-on-error focus:bg-error-container focus:border-error-container">Usuń</button>
+            <p class="mb-3 font-normal text-gray-400" v-if="description">{{ description }}</p>
+            <p class="mb-3 font-normal text-gray-400" v-else>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="flex">
+                <div class="flex-none text-left">
+                    <RaisedButton label="L" variant="secondary"/>
+                </div>
+                <div class="flex-1 text-right">
+                    <RaisedButton class="mr-2" label="Usuń" variant="error"/>
+                    <RaisedButton label="Edytuj"/>
+                </div>
             </div>
         </div>
     </div>
