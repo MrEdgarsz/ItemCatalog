@@ -13,10 +13,9 @@ const description = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit
 const previewSrc = ref('');
 
 
-function previewFile(event: Event) {
-    const eventFiles = (event.target as HTMLInputElement).files;
-    if (eventFiles != null) {
-        previewSrc.value = URL.createObjectURL(eventFiles[0]);
+function previewFile(file: File) {
+    if (file != null) {
+        previewSrc.value = URL.createObjectURL(file);
     }
 
 }
