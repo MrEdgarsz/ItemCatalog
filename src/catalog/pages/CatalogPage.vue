@@ -22,15 +22,12 @@ const items = ref([
 <template>
   <div class="container bg-background py-8 mx-auto">
     <div class="text-center">
-      <RaisedButton label="Dodaj nowy produkt"/>
+      <RaisedButton label="Dodaj nowy produkt" />
     </div>
-    <div class="grid grid-cols-4 gap-6 pt-6 phone-landscape:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3">  
+    <div class="grid grid-cols-4 gap-6 pt-6 phone-landscape:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3">
       <div class="flex justify-center" v-for="item in items">
         <ItemCard :key="item.id" :name="item.name" :type="item.type" :description="item.description"/>
       </div>
     </div>
   </div>
 </template>
-
-<style>
-</style>
