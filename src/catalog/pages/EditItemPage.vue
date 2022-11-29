@@ -4,6 +4,7 @@ import SelectInput from '@/common/components/inputs/SelectInput.vue';
 import TextArea from '@/common/components/inputs/TextArea.vue';
 import TextInput from '@/common/components/inputs/TextInput.vue';
 import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
+import ItemCard from '@/catalog/components/ItemCard.vue'
 import { ref } from 'vue';
 
 const productName = ref('Przykładowa książka');
