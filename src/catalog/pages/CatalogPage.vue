@@ -26,7 +26,14 @@ const items = ref([
     </div>
     <div class="grid grid-cols-4 gap-6 pt-6 phone-landscape:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3">
       <div class="flex justify-center" v-for="item in items">
-        <ItemCard :key="item.id" :name="item.name" :type="item.type" :description="item.description"/>
+        <ItemCard class="flex flex-col" :key="item.id" :name="item.name" :type="item.type"
+          :description="item.description">
+          <div class="flex flex-row-reverse">
+            <RaisedButton label="Edytuj" />
+            <RaisedButton class="mr-2" label="Usuń" variant="error" />
+            <RaisedButton class="mr-2" label="L" variant="secondary" />
+          </div>
+        </ItemCard>
       </div>
     </div>
   </div>
