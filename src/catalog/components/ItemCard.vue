@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
-defineProps(['name', 'type', 'description'])
+defineProps(['name', 'imageSrc', 'type', 'description'])
 </script>
 
 <template>
