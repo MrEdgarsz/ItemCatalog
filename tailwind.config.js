@@ -22,6 +22,7 @@ module.exports = {
         "on-surface-variant": "#C0C8CC",
         "on-surface": "#E1E3E4",
         "surface-variant": "#40484C",
+        "surface+1": "#1c2528",
         "surface": "#191C1D",
         "on-secondary-container": "#CFE6F1",
         "on-secondary": "#1E333C",
@@ -36,6 +37,9 @@ module.exports = {
         "surface+3": "#203035",
         "surface+4": "#213237",
         "surface+5": "#22353c"
+      },
+      width:{
+        "desktop": "1840px",
       },
     },
     fontSize: {
@@ -88,8 +92,22 @@ module.exports = {
       "body-large": "0.0313rem",
       "body-medium": "0.0156rem",
       "body-small": "0.025rem",
-    }
+    },
+    
+    screens: {
+      'desktop': {'min': '1920px'},
+      // => @media (max-width: 1279px) { ... }
 
+      'laptop': {'max': '1440px'},
+      // => @media (max-width: 1023px) { ... }
+
+      'tablet': {'max': '1024px'},
+      // => @media (max-width: 767px) { ... }
+
+      'phone-landscape': {'max': '768px'},
+      'phone-portrait': {'max': '425px'},
+      // => @media (max-width: 639px) { ... }
+    }
   },
   plugins: [],
 }

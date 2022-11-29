@@ -24,7 +24,7 @@ function createIconClasses(isActive: boolean): string {
 </script>
 
 <template>
-  <div class="p-5 container">
+  <div class="p-5 px-8 container">
     <RouterLink :to="navigateTo" v-bind="$props" custom v-slot="{ isActive, href, navigate }">
       <a v-bind="$attrs" :href="href" @click="navigate">
         <div class="flex flex-col container justify-center items-center group">
