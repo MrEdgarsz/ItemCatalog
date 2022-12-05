@@ -44,7 +44,7 @@ onMounted(() => {
 
 
 <template>
-    <button class="mdc-button" ref="buttonHtml" :class="buttonClasses">
+    <button class="mdc-button custom-button" ref="buttonHtml" :class="buttonClasses">
         <span class="mdc-button__ripple"></span>
         <span class="mdc-button__focus-ring"></span>
         <span class="material-icons mdc-button__icon" aria-hidden="true" v-if="(props.icon !== undefined)">{{ props.icon
