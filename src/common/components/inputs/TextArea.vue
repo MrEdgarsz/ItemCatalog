@@ -48,7 +48,7 @@ onMounted(() => {
         <span class="mdc-text-field__resizer">
             <textarea class="mdc-text-field__input" aria-labelledby="my-label-id" rows="5" cols="40"
                 :maxlength="props.maxLength"></textarea>
-            <span class="mdc-text-field-character-counter" v-if="props.maxLength">0 / 500</span>
+            <span class="mdc-text-field-character-counter" v-if="props.maxLength">0 / {{ props.maxLength }}</span>
         </span>
         <span class="mdc-line-ripple"></span>
     </label>

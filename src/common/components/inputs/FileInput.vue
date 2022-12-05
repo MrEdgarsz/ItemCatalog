@@ -17,7 +17,7 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'input'])
 
 // Methods
 function onFileChange(event: Event): void {
@@ -26,6 +26,8 @@ function onFileChange(event: Event): void {
     fileName.value = files ? files[0].name : null;
     textField.value?.focus();
     emit('update:modelValue', files ? files[0] : null);
+    emit('input', files ? files[0] : null);
+
 }
 
 function onFocus(): void {
