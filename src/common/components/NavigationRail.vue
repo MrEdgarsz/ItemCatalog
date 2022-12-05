@@ -12,13 +12,8 @@ import NavigationItem from './NavigationItem.vue';
         <img src="@/assets/logo.svg" alt="" class="h-10 w-10">
       </div>
 
-      <NavigationItem title="Strona Główna" navigateTo="/" :selected="true">
-        <template #icon>
-          <HomeIcon />
-        </template>
-      </NavigationItem>
 
-      <NavigationItem title="Katalog" navigateTo="/test" :selected="true">
+      <NavigationItem title="Katalog" navigateTo="/" :selected="true">
         <template #icon>
           <BookOpenIcon />
         </template>
