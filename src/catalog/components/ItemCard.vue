@@ -32,6 +32,6 @@ defineProps(['name', 'imageSrc', 'type', 'description'])
 @use "@material/button";
 
 #favorite-button {
-    @include button.ink-color(#f59e0b);
+    @include button.ink-color(#E1E3E4);
 }
 </style>
