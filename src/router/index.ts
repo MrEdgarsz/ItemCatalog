@@ -14,12 +14,17 @@ const router = createRouter({
     {
       path: '/edit-item',
       name: 'editItem',
-      component: AddOrEditItemPageVue,
+      component: AddOrEditItemPage,
     },
     {
       path: '/add-item',
       name: 'addItem',
-      component: AddOrEditItemPageVue
+      component: AddOrEditItemPage,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginPage,
     },
   ]
 })
