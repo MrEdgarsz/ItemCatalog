@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CatalogPage from '../catalog/pages/CatalogPage.vue'
-import EditItemPage from '@/catalog/pages/EditItemPage.vue'
-import AddOrEditItemPageVue from '@/catalog/pages/AddOrEditItemPage.vue'
+import AddOrEditItemPage from '@/catalog/pages/AddOrEditItemPage.vue'
+import LoginPage from '@/auth/pages/LoginPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
