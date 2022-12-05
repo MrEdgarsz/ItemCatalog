@@ -20,6 +20,15 @@ const items = ref([
   { id: 11, name: 'Przykładowa gra planszowa', type: 'Gra planszowa', description: "" },
   { id: 12, name: 'Przykładowa książka', type: 'Książka', description: "" }
 ])
+
+function navigateToAddPage() {
+  router.push('/add-item');
+}
+
+function navigateToEditPage() {
+  router.push('/edit-item');
+}
+
 </script>
 
 <template>
