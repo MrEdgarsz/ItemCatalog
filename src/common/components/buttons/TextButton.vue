@@ -44,7 +44,7 @@ onMounted(() => {
 
 
 <template>
-    <button class="mdc-button" ref="buttonHtml" :class="buttonClasses">
+    <button class="mdc-button text-button" ref="buttonHtml" :class="buttonClasses">
         <span class="mdc-button__ripple"></span>
         <span class="mdc-button__focus-ring"></span>
         <span class="material-icons mdc-button__icon" aria-hidden="true" v-if="(props.icon !== undefined)">{{ props.icon
@@ -56,19 +56,27 @@ onMounted(() => {
 <style lang="scss">
 @use "@material/button";
 
-.custom-button.primary {
+.text-button.primary {
     @include button.filled-accessible(#004D62);
+    @include button.container-fill-color(#004d6200);
+    @include button.ink-color(#004D62);
 }
 
-.custom-button.secondary {
+.text-button.secondary {
     @include button.filled-accessible(#354A53);
+    @include button.container-fill-color(#004d6200);
+    @include button.ink-color(#354A53);
 }
 
-.custom-button.tertiary {
+.text-button.tertiary {
     @include button.filled-accessible(#434465);
+    @include button.container-fill-color(#004d6200);
+    @include button.ink-color(#434465);
 }
 
-.custom-button.error {
-    @include button.filled-accessible(#93000A);
+.text-button.error {
+    @include button.filled-accessible(#d1402f);
+    @include button.container-fill-color(#004d6200);
+    @include button.ink-color(#d1402f);
 }
 </style>
