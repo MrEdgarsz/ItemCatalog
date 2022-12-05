@@ -43,7 +43,7 @@ function navigateToEditPage() {
           <div class="flex flex-row-reverse items-center">
             <RaisedButton label="Edytuj" @click="navigateToEditPage" />
             <TextButton class="mr-2" label="Usuń" variant="error" />
-            <IconButton class="mr-2" icon="favorite" />
+            <IconButton class="mr-2" icon="favorite" id="favorite-button" />
           </div>
         </ItemCard>
       </div>
