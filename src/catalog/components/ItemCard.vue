@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import IconButton from '@/common/components/buttons/IconButton.vue';
 import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
 defineProps(['name', 'type', 'description'])
 </script>
@@ -6,7 +7,8 @@ defineProps(['name', 'type', 'description'])
 <template>
     <div class="max-w-sm rounded-lg shadow-md bg-surface+1 hover:bg-on-surface/[0.08] focus:bg-on-surface/[0.12]">
         <a href="#">
-            <img class="rounded-t-lg max-w-full h-auto" src="../../assets/images/product-preview.png" alt="Product preview"/>
+            <img class="rounded-t-lg max-w-full h-auto" src="../../assets/images/product-preview.png"
+                alt="Product preview" />
         </a>
         <div class="p-5">
             <a href="#">
@@ -14,16 +16,25 @@ defineProps(['name', 'type', 'description'])
                 <p class="mb-2 text-lg text-gray-500">{{ type }}</p>
             </a>
             <p class="mb-3 font-normal text-gray-400" v-if="description">{{ description }}</p>
-            <p class="mb-3 font-normal text-gray-400" v-else>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <div class="flex">
-                <div class="flex-none text-left">
-                    <RaisedButton label="L" variant="secondary"/>
-                </div>
-                <div class="flex-1 text-right">
-                    <RaisedButton class="mr-2" label="Usuń" variant="error"/>
-                    <RaisedButton label="Edytuj"/>
-                </div>
+            <p class="mb-3 font-normal text-gray-400" v-else>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="flex justify-center items-center">
+
+                <IconButton icon="favorite" id="favorite-button" />
+
+
+                <RaisedButton class="mr-2" label="Usuń" variant="error" />
+                <RaisedButton label="Edytuj" />
+
             </div>
         </div>
     </div>
 </template>
+
+<style lang="scss">
+@use "@material/button";
+
+#favorite-button {
+    @include button.ink-color(#f59e0b);
+}
+</style>
