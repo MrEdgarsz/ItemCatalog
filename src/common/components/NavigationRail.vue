@@ -1,6 +1,6 @@
 
 <script lang="ts" setup>
-import { HomeIcon, BookOpenIcon, ArrowLeftOnRectangleIcon } from '@heroicons/vue/20/solid'
+import { HomeIcon, BookOpenIcon, ArrowLeftOnRectangleIcon, UsersIcon } from '@heroicons/vue/20/solid'
 import NavigationItem from './NavigationItem.vue';
 </script>
 
@@ -19,6 +19,11 @@ import NavigationItem from './NavigationItem.vue';
       <NavigationItem title="Logowanie" navigateTo="/login">
         <template #icon>
           <ArrowLeftOnRectangleIcon />
+        </template>
+      </NavigationItem>
+      <NavigationItem title="Autorzy" navigateTo="/authors">
+        <template #icon>
+          <UsersIcon />
         </template>
       </NavigationItem>
       <!-- <NavigationItem title="Ulubione" navigateTo="/test" :selected="true">
