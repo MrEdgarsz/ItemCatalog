@@ -18,8 +18,8 @@ function navigateToAddPage() {
   router.push('/add-item');
 }
 
-function navigateToEditPage() {
-  router.push('/edit-item');
+function navigateToEditPage(id: number) {
+  router.push({ name: 'editItem', params: { productId: id.toString() } })
 }
 
 </script>
