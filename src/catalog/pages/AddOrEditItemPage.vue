@@ -11,20 +11,6 @@ import { useProductStore } from '../stores/ProductStore';
 import { ProductController } from '../controllers/ProductController';
 import type { ProductInputDto } from '../models/dtos/ProductInputDto';
 
-const props = defineProps({
-    name: {
-        type: String,
-    },
-    imageSrc: {
-        type: String,
-    },
-    category: {
-        type: String,
-    },
-    description: {
-        type: String,
-    },
-});
 
 
 
