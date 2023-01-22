@@ -7,6 +7,9 @@ import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
 import ItemCard from '@/catalog/components/ItemCard.vue'
 import { ref } from 'vue';
 import router from '@/router';
+import { useProductStore } from '../stores/ProductStore';
+import { ProductController } from '../controllers/ProductController';
+import type { ProductInputDto } from '../models/dtos/ProductInputDto';
 
 const props = defineProps({
     name: {
