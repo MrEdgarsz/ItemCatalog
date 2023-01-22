@@ -22,6 +22,15 @@ function navigateToEditPage(id: number) {
   router.push({ name: 'editItem', params: { productId: id.toString() } })
 }
 
+async function getAllProducts() {
+  await productsController.getAll();
+}
+async function deleteProduct(id: number) {
+  await productsController.delete(id);
+}
+
+
+getAllProducts();
 </script>
 
 <template>
