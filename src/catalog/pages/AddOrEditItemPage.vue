@@ -15,7 +15,7 @@ import type { ProductInputDto } from '../models/dtos/ProductInputDto';
 const productName = ref('');
 const productCategory = ref('');
 const description = ref('');
-const previewSrc = ref('');
+const previewSrc = ref();
 const productStore = useProductStore();
 const productsController = new ProductController();
 let isEdit: boolean = false;
@@ -38,15 +38,14 @@ if (router.currentRoute.value.fullPath != '/add-item') {
 
 function previewFile(file: File) {
     if (file != null) {
-        previewSrc.value = URL.createObjectURL(file);
+        previewSrc.value = file;
     }
 }
 
 async function saveProduct() {
     console.log('At saveProduct () isEdit: ', isEdit);
     if (productName.value.length != 0 && productCategory.value.length != 0 && previewSrc.value.length != 0 && description.value.length != 0) {
-
-        const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image_src: 'https://www.mswordcoverpages.com/wp-content/uploads/2018/10/Book-cover-page-4-CRC.png', description: description.value };
+        const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image: previewSrc.value, description: description.value };
         if (isEdit) {
             const productId = parseInt(router.currentRoute.value.params['productId'].toString());
             await productsController.patch(productId, dto);
