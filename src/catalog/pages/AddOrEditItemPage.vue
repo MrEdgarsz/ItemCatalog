@@ -76,25 +76,16 @@ async function saveProduct() {
             </div>
         </div>
         <div class="grid desktop:grid-cols-4 desktop:gap-1 w-full mt-5">
-            <form class="flex flex-col m-5 desktop:col-span-2 desktop:col-start-2" role="edit" action="" method="post">
-                <TextInput v-model="productName" label="Nazwa produktu" />
+            <form class="flex flex-col m-5 desktop:col-span-2 desktop:col-start-2" role="edit" @submit.prevent="">
+                <TextInput v-model="productName" label="Nazwa produktu" :initial-value="productName" />
                 <FileInput v-model="previewSrc" @input="previewFile" label="Zdjęcie produktu" />
                 <SelectInput v-model="productCategory" :options="['Książka', 'Gra Planszowa']"
-                    label="Kategoria produktu" />
-                <TextArea v-model="description" label="Opis produktu" :max-length="250" />
+                    :initial-value="productCategory" label="Kategoria produktu" />
+                <TextArea v-model="description" label="Opis produktu" :initial-value="description" :max-length="250" />
                 <div class="text-right">
-                    <RaisedButton label="Zapisz" />
+                    <RaisedButton label="Zapisz" @click="saveProduct()" />
                 </div>
             </form>
         </div>
-
     </div>
-
-
-
-
-
-
-
-
 </template>
