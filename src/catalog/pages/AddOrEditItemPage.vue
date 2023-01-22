@@ -12,6 +12,13 @@ import { ProductController } from '../controllers/ProductController';
 import type { ProductInputDto } from '../models/dtos/ProductInputDto';
 
 
+const productName = ref('');
+const productCategory = ref('');
+const description = ref('');
+const previewSrc = ref('');
+const productStore = useProductStore();
+const productsController = new ProductController();
+let isEdit: boolean = false;
 
 
 const productName = ref(props.name);
