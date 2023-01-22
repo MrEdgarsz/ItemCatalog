@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import IconButton from '@/common/components/buttons/IconButton.vue';
-import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
 defineProps(['name', 'imageSrc', 'type', 'description'])
 </script>
 
