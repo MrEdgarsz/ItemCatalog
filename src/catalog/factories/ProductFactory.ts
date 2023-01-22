@@ -3,11 +3,10 @@ import { Product } from "../models/Product";
 
 export class ProductFactory {
     public static fromDto(dto: ProductDto): Product {
-        const imageSrc = URL.createObjectURL(dto.image)
         return new Product(
             dto.id,
             dto.name,
-            imageSrc,
+            dto.image_src,
             dto.category,
             dto.description,
         );

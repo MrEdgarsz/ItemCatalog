@@ -25,7 +25,7 @@ export class ProductsService implements ProductsInterface {
     }
     async addProduct(productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
         const formData = ProductDtoFactory.toFormData(productInputDto);
-        const response = await AxiosClient.instance.post<ProductDto>("products", productInputDto, { headers: { 'Content-Type': 'multipart/form-data' }, });
+        const response = await AxiosClient.instance.post<ProductDto>("products", formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
         if (response.status === 200) {
             const product: Product = ProductFactory.fromDto(response.data);
             return right(product);
@@ -38,7 +38,8 @@ export class ProductsService implements ProductsInterface {
 
     }
     async patchProduct(id: number, productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
-        const response = await AxiosClient.instance.patch("products/" + id, productInputDto,);
+        const formData = ProductDtoFactory.toFormData(productInputDto);
+        const response = await AxiosClient.instance.patch("products/" + id, formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
 
         if (response.status === 200) {
             const product: Product = ProductFactory.fromDto(response.data);

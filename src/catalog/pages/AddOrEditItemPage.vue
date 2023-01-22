@@ -15,7 +15,8 @@ import type { ProductInputDto } from '../models/dtos/ProductInputDto';
 const productName = ref('');
 const productCategory = ref('');
 const description = ref('');
-const previewSrc = ref();
+const previewSrc = ref('');
+const imagefile = ref();
 const productStore = useProductStore();
 const productsController = new ProductController();
 let isEdit: boolean = false;
@@ -38,14 +39,16 @@ if (router.currentRoute.value.fullPath != '/add-item') {
 
 function previewFile(file: File) {
     if (file != null) {
-        previewSrc.value = file;
+        const imageSrc = URL.createObjectURL(file)
+        imagefile.value = file
+        previewSrc.value = imageSrc;
     }
 }
 
 async function saveProduct() {
     console.log('At saveProduct () isEdit: ', isEdit);
     if (productName.value.length != 0 && productCategory.value.length != 0 && previewSrc.value.length != 0 && description.value.length != 0) {
-        const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image: previewSrc.value, description: description.value };
+        const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image: imagefile.value, description: description.value };
         if (isEdit) {
             const productId = parseInt(router.currentRoute.value.params['productId'].toString());
             await productsController.patch(productId, dto);
