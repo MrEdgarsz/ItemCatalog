@@ -2,11 +2,10 @@
 import { ref } from 'vue'
 import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
 import ItemCard from '../components/ItemCard.vue'
+import ItemFilter from '../components/ItemFilter.vue'
 import router from '@/router';
 import TextButton from '@/common/components/buttons/TextButton.vue';
 import IconButton from '@/common/components/buttons/IconButton.vue';
-import SelectInput from '@/common/components/inputs/SelectInput.vue';
-import TextInput from '@/common/components/inputs/TextInput.vue';
 
 const items = ref([
   { id: 1, name: 'Przykładowa książka', type: 'Książka', description: "" },
@@ -40,17 +39,7 @@ function navigateToEditPage() {
       <br/>
       <div class="flex flex-col">
         <div class="mx-auto">
-          <div class="bg-surface+1 p-6 rounded-lg shadow-md">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <TextInput label="Nazwa produktu" />
-                <SelectInput :options="['Książka', 'Gra Planszowa']"
-                              label="Kategoria produktu" />
-                <SelectInput :options="['Nazwa: Alfabetycznie', 'Data: Od najnowszych', 'Data: Od najstarszych']"
-                        label="Sortowanie" />
-            </div>
-            <TextButton class="mr-2" label="Resetuj" variant="error" />
-            <RaisedButton label="Szukaj" />
-          </div>
+          <ItemFilter />
         </div>
       </div>
     </div>
