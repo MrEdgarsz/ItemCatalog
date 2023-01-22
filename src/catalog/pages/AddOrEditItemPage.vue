@@ -21,13 +21,20 @@ const productsController = new ProductController();
 let isEdit: boolean = false;
 
 
-const productName = ref(props.name);
-const productCategory = ref(props.category);
-const description = ref(props.description);
-const previewSrc = ref(props.imageSrc);
+if (router.currentRoute.value.fullPath != '/add-item') {
+    isEdit = true;
 
+    const productId = parseInt(router.currentRoute.value.params['productId'].toString());
 
+    const response = productStore.getProductById(productId);
 
+    if (response) {
+        productName.value = response.name;
+        productCategory.value = response.category;
+        description.value = response.description;
+        previewSrc.value = response.imageSrc;
+    }
+}
 
 function previewFile(file: File) {
     if (file != null) {
