@@ -40,7 +40,19 @@ function previewFile(file: File) {
     if (file != null) {
         previewSrc.value = URL.createObjectURL(file);
     }
+}
 
+async function saveProduct() {
+    console.log('At saveProduct () isEdit: ', isEdit);
+
+    const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image_src: 'https://www.mswordcoverpages.com/wp-content/uploads/2018/10/Book-cover-page-4-CRC.png', description: description.value };
+    if (isEdit) {
+        const productId = parseInt(router.currentRoute.value.params['productId'].toString());
+        await productsController.patch(productId, dto);
+    } else {
+        await productsController.add(dto);
+    }
+    router.push('/');
 }
 
 </script>
