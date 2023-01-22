@@ -2,6 +2,7 @@ import { ServerError, UnauthorizedException, type AppException } from "@/common/
 import { AxiosClient } from "@/common/utils/http_client/AxiosClient";
 import { Unit } from "@/common/utils/Unit";
 import { left, right, type Either } from "fp-ts/lib/Either";
+import { ProductDtoFactory } from "../factories/ProductDtoFactory";
 import { ProductFactory } from "../factories/ProductFactory";
 import type { ProductsInterface } from "../interfaces/ProductInterface";
 import type { ProductDto } from "../models/dtos/ProductDto";
@@ -23,7 +24,8 @@ export class ProductsService implements ProductsInterface {
         }
     }
     async addProduct(productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
-        const response = await AxiosClient.instance.post<ProductDto>("products", productInputDto);
+        const formData = ProductDtoFactory.toFormData(productInputDto);
+        const response = await AxiosClient.instance.post<ProductDto>("products", productInputDto, { headers: { 'Content-Type': 'multipart/form-data' }, });
         if (response.status === 200) {
             const product: Product = ProductFactory.fromDto(response.data);
             return right(product);
