@@ -39,17 +39,17 @@ getAllProducts();
       <RaisedButton label="Dodaj nowy produkt" @click="navigateToAddPage" />
     </div>
     <div class="grid grid-cols-4 gap-6 pt-6 phone-landscape:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3">
-      <div class="flex justify-center" v-for="item in items">
-        <ItemCard class="flex flex-col" :key="item.id" :name="item.name" :type="item.type"
-          :description="item.description">
+      <div class="flex justify-center" v-for="product in storeRef.products.value" :key='product.id'>
+        <ItemCard class="flex flex-col" :key="product.id" :name="product.name" :type="product.category"
+          :description="product.description" :image-src="product.imageSrc">
           <div class="grid grid-cols-2 grid-rows-1">
 
             <div class="flex items-center justify-start">
               <IconButton class="mr-2 " icon="favorite" id="favorite-button" />
             </div>
             <div class="flex items-center justify-end">
-              <TextButton class="mr-2" label="Usuń" variant="error" />
-              <RaisedButton label="Edytuj" @click="navigateToEditPage" />
+              <TextButton class="mr-2" label="Usuń" variant="error" @click="deleteProduct(product.id)" />
+              <RaisedButton label="Edytuj" @click="navigateToEditPage(product.id)" />
             </div>
           </div>
         </ItemCard>
