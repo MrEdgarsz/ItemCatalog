@@ -13,7 +13,7 @@ const router = createRouter({
       component: CatalogPage
     },
     {
-      path: '/edit-item',
+      path: '/edit-item/:productId',
       name: 'editItem',
       component: AddOrEditItemPage,
     },
