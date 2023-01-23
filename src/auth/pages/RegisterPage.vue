@@ -10,10 +10,12 @@ const authController = new AuthController();
 
 const email = ref('');
 const password = ref('');
+const passwordConfirmation = ref('');
 const error = ref('');
 
-async function login() {
-    const response = await authController.login(email.value, password.value);
+async function register() {
+    const response = await authController.register(email.value, password.value, passwordConfirmation.value);
+    console.log(response);
     if (isLeft(response)) {
         error.value = response.left;
     } else {
@@ -27,12 +29,14 @@ async function login() {
     <div class="flex flex-col mt-5 w-full h-screen">
         <div class="m-auto">
             <div class="row-start-1 col-start-3 text-center rounded-lg mb-3">
-                <span class="text-display-medium text-on-surface">Logowanie</span>
+                <span class="text-display-medium text-on-surface">Rejestracja</span>
             </div>
             <form class="flex flex-col p-6 bg-surface+1 col-start-3 row-start-2 rounded-lg" @submit.prevent="">
-                <TextInput :initialValue="email" label="Adres e-mail" v-model="email" />
-                <TextInput :initialValue="password" label="Hasło" inputType="password" v-model="password" />
-                <RaisedButton label="Zaloguj się" @click="login()" />
+                <TextInput v-model="email" :initialValue="email" label="Adres e-mail" />
+                <TextInput v-model="password" :initialValue="password" label="Hasło" inputType="password" />
+                <TextInput v-model="passwordConfirmation" :initialValue="passwordConfirmation" label="Potwierdź hasło"
+                    inputType="password" />
+                <RaisedButton label="Zarejestruj się" @click="register()" />
             </form>
         </div>
     </div>
