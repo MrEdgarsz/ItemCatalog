@@ -19,7 +19,7 @@ const router = createRouter({
       component: FavouritesPage,
     },
     {
-      path: '/edit-item',
+      path: '/edit-item/:productId',
       name: 'editItem',
       component: AddOrEditItemPage,
     },
