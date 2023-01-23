@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CatalogPage from '../catalog/pages/CatalogPage.vue'
+import FavouritesPage from '../catalog/pages/FavouritesPage.vue'
 import AddOrEditItemPage from '@/catalog/pages/AddOrEditItemPage.vue'
 import LoginPage from '@/auth/pages/LoginPage.vue'
+import RegisterPage from '@/auth/pages/RegisterPage.vue'
 import AuthorsPage from '@/authors/pages/AuthorsPage.vue'
 
 const router = createRouter({
@@ -11,6 +13,11 @@ const router = createRouter({
       path: '/',
       name: 'catalog',
       component: CatalogPage
+    },
+    {
+      path: '/favourites',
+      name: 'favourites',
+      component: FavouritesPage,
     },
     {
       path: '/edit-item/:productId',
@@ -26,6 +33,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginPage,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterPage,
     },
     {
       path: '/authors',

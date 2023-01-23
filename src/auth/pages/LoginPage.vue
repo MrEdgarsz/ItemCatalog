@@ -23,11 +23,9 @@ async function login() {
 
 </script>
 
-
 <template>
-
     <div class="flex flex-col mt-5 w-full h-screen">
-        <div class="m-auto w-1/5">
+        <div class="m-auto">
             <div class="row-start-1 col-start-3 text-center rounded-lg mb-3">
                 <span class="text-display-medium text-on-surface">Logowanie</span>
             </div>
@@ -37,7 +35,5 @@ async function login() {
                 <RaisedButton label="Zaloguj się" @click="login()" />
             </form>
         </div>
-
     </div>
-
 </template>
