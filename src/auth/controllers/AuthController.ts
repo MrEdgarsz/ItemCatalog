@@ -26,6 +26,7 @@ export class AuthController{
     public async register(username:string, password:string, passwordConfirmation:string): Promise<Either<string, Unit>>{
         const authStore = useAuthStore();
         const response = await this.authService.register(username,password,passwordConfirmation);
+        console.log(response);
         if(isLeft(response)){
             const error = response.left;
             if(error instanceof UnprocessableEntityException){

@@ -27,7 +27,7 @@ export class AuthService implements AuthInterface{
     async register(username: string, password: string, passwordConfirmation: string): Promise<Either<AppException,AuthTokenDto>> {
         const dto = new RegisterDto(username, password, passwordConfirmation);
         const response = await AxiosClient.instance.post<AuthTokenDto | UnprocessableEntityDto>('auth/register',dto);
-        if(response.status == 200){
+        if(response.status == 201){
             return right(response.data as AuthTokenDto);
         }else if (response.status == 401){
             const error = response as AxiosResponse<UnprocessableEntityDto>;
