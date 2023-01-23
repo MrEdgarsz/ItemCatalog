@@ -44,7 +44,8 @@ onMounted(() => {
         <span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
             {{ props.label }}
         </span>
-        <input class="mdc-text-field__input" :type="props.inputType" aria-labelledby="my-label-id">
+        <input class="mdc-text-field__input" :type="props.inputType" :value="props.initialValue"
+            aria-labelledby="my-label-id">
         <span class="mdc-line-ripple"></span>
     </label>
 </template>
