@@ -8,7 +8,7 @@ export class AxiosClient {
         AxiosClient._instance = axios.create({
             baseURL: import.meta.env.VITE_BASE_URL,
             headers: this._createHeaders(),
-
+            validateStatus: (status) => [200,201,400,500,403,401].includes(status),
         });
 
         AxiosClient._instance.interceptors.request.use((config) => {
