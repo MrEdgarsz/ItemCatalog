@@ -7,8 +7,10 @@ import IconButton from '@/common/components/buttons/IconButton.vue';
 import { ProductController } from '../controllers/ProductController';
 import { useProductStore } from '../stores/ProductStore';
 import { storeToRefs } from 'pinia';
+import { FavouriteController } from '@/favourites/controllers/FavouriteController';
 
 const productsController = new ProductController();
+const favouritesController = new FavouriteController();
 const productStore = useProductStore();
 const storeRef = storeToRefs(productStore);
 
@@ -28,6 +30,9 @@ async function getAllProducts() {
 async function deleteProduct(id: number) {
   await productsController.delete(id);
 }
+async function setFavourite(id: number) {
+  await favouritesController.setFavourites(id);
+}
 
 
 getAllProducts();
@@ -43,9 +48,8 @@ getAllProducts();
         <ItemCard class="flex flex-col" :key="product.id" :name="product.name" :type="product.category"
           :description="product.description" :image-src="product.imageSrc">
           <div class="grid grid-cols-2 grid-rows-1">
-
             <div class="flex items-center justify-start">
-              <IconButton class="mr-2 " icon="favorite" id="favorite-button" />
+              <IconButton class="mr-2 " icon="favorite" id="favorite-button" @click="setFavourite(product.id)" />
             </div>
             <div class="flex items-center justify-end">
               <TextButton class="mr-2" label="Usuń" variant="error" @click="deleteProduct(product.id)" />
