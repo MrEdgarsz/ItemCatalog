@@ -1,6 +1,28 @@
 <script lang="ts" setup>
 import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
 import TextInput from '@/common/components/inputs/TextInput.vue';
+import router from '@/router';
+import { isLeft } from 'fp-ts/lib/Either';
+import { ref } from 'vue';
+import { AuthController } from '../controllers/AuthController';
+
+const authController = new AuthController();
+
+const email = ref('');
+const password = ref('');
+const passwordConfirmation = ref('');
+const error = ref('');
+
+async function register() {
+    const response = await authController.register(email.value, password.value, passwordConfirmation.value);
+    console.log(response);
+    if (isLeft(response)) {
+        error.value = response.left;
+    } else {
+        router.replace({ name: 'catalog' });
+    }
+}
+
 </script>
 
 <template>
@@ -9,12 +31,13 @@ import TextInput from '@/common/components/inputs/TextInput.vue';
             <div class="row-start-1 col-start-3 text-center rounded-lg mb-3">
                 <span class="text-display-medium text-on-surface">Rejestracja</span>
             </div>
-            <div class="flex flex-col p-6 bg-surface+1 col-start-3 row-start-2 rounded-lg">
-                <TextInput label="Adres e-mail" />
-                <TextInput label="Hasło" inputType="password" />
-                <TextInput label="Potwierdź hasło" inputType="passwordConfirmation" />
-                <RaisedButton label="Zarejestruj się" />
-            </div>
+            <form class="flex flex-col p-6 bg-surface+1 col-start-3 row-start-2 rounded-lg" @submit.prevent="">
+                <TextInput v-model="email" :initialValue="email" label="Adres e-mail" />
+                <TextInput v-model="password" :initialValue="password" label="Hasło" inputType="password" />
+                <TextInput v-model="passwordConfirmation" :initialValue="passwordConfirmation" label="Potwierdź hasło"
+                    inputType="password" />
+                <RaisedButton label="Zarejestruj się" @click="register()" />
+            </form>
         </div>
     </div>
 </template>

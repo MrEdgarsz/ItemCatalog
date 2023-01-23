@@ -1,4 +1,4 @@
-// import { useAuthStore } from "@/auth/stores/AuthStore";
+import { useAuthStore } from "@/auth/stores/AuthStore";
 import axios, { AxiosHeaders, type AxiosInstance } from "axios";
 
 export class AxiosClient {
@@ -11,13 +11,13 @@ export class AxiosClient {
 
         });
 
-        // AxiosClient._instance.interceptors.request.use((config) => {
-        //     const authStore = useAuthStore();
-        //     if (authStore.isAuthenticated) {
-        //         config.headers["Authorization"] = `Bearer ${authStore.token}`;
-        //     }
-        //     return config;
-        // });
+        AxiosClient._instance.interceptors.request.use((config) => {
+            const authStore = useAuthStore();
+            if (authStore.isAuthenticated) {
+                config.headers["Authorization"] = `Bearer ${authStore.token}`;
+            }
+            return config;
+        });
     }
 
 
