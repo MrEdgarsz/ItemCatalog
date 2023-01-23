@@ -13,6 +13,7 @@ const password = ref('');
 const error = ref('');
 
 async function login() {
+    error.value = '';
     const response = await authController.login(email.value, password.value);
     if (isLeft(response)) {
         error.value = response.left;
@@ -32,6 +33,7 @@ async function login() {
             <form class="flex flex-col p-6 bg-surface+1 col-start-3 row-start-2 rounded-lg" @submit.prevent="">
                 <TextInput :initialValue="email" label="Adres e-mail" v-model="email" />
                 <TextInput :initialValue="password" label="Hasło" inputType="password" v-model="password" />
+                <span class="text-label-small text-error">{{ error }}</span>
                 <RaisedButton label="Zaloguj się" @click="login()" />
             </form>
         </div>

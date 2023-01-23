@@ -14,8 +14,8 @@ const passwordConfirmation = ref('');
 const error = ref('');
 
 async function register() {
+    error.value = '';
     const response = await authController.register(email.value, password.value, passwordConfirmation.value);
-    console.log(response);
     if (isLeft(response)) {
         error.value = response.left;
     } else {
@@ -36,6 +36,7 @@ async function register() {
                 <TextInput v-model="password" :initialValue="password" label="Hasło" inputType="password" />
                 <TextInput v-model="passwordConfirmation" :initialValue="passwordConfirmation" label="Potwierdź hasło"
                     inputType="password" />
+                <span class="text-label-small text-error">{{ error }}</span>
                 <RaisedButton label="Zarejestruj się" @click="register()" />
             </form>
         </div>
