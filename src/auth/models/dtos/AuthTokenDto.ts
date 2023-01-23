@@ -1,4 +1,4 @@
 export interface AuthTokenDto{
-    token: string;
-    expires: string;
+    access_token: string;
+    expires_at: string;
 }
