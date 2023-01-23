@@ -2,3 +2,6 @@ export type AppException = UnauthorizedException | EmailOrPasswordIncorrectExcep
 export class EmailOrPasswordIncorrectException {}
 export class UnauthorizedException  {}
 export class ServerError {}
+export class UnprocessableEntityException {
+    constructor(public errors: Array<string> | string) {}
+}
