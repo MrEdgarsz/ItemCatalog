@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CatalogPage from '../catalog/pages/CatalogPage.vue'
+import FavouritesPage from '../catalog/pages/FavouritesPage.vue'
 import AddOrEditItemPage from '@/catalog/pages/AddOrEditItemPage.vue'
 import LoginPage from '@/auth/pages/LoginPage.vue'
 import AuthorsPage from '@/authors/pages/AuthorsPage.vue'
@@ -11,6 +12,11 @@ const router = createRouter({
       path: '/',
       name: 'catalog',
       component: CatalogPage
+    },
+    {
+      path: '/favourites',
+      name: 'favourites',
+      component: FavouritesPage,
     },
     {
       path: '/edit-item/:productId',
