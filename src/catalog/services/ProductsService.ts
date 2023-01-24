@@ -23,6 +23,19 @@ export class ProductsService implements ProductsInterface {
             return left(new ServerError());
         }
     }
+    async getProductFavourites(): Promise<Either<AppException, Product[]>> {
+        const response = await AxiosClient.instance.get<Array<ProductDto>>("products/product-favourites");
+
+        if (response.status === 200) {
+            const allProducts: Product[] = [];
+            response.data.map((value) => {
+                allProducts.push(ProductFactory.fromDto(value))
+            });
+            return right(allProducts);
+        } else {
+            return left(new ServerError());
+        }
+    }
     async addProduct(productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
         const formData = ProductDtoFactory.toFormData(productInputDto);
         const response = await AxiosClient.instance.post<ProductDto>("products", formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
