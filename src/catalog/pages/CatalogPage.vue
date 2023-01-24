@@ -57,7 +57,8 @@ getAllProducts();
           :description="product.description" :image-src="product.imageSrc">
           <div class="grid grid-cols-2 grid-rows-1">
             <div class="flex items-center justify-start">
-              <IconButton class="mr-2 " icon="favorite" id="favorite-button" @click="setFavourite(product.id)" />
+              <IconButton class="mr-2 favourite-button" :class="product.isFavourite ? 'active' : ''" icon="favorite"
+                @click="setFavourite(product.id)" />
             </div>
             <div class="flex items-center justify-end">
               <TextButton class="mr-2" label="Usuń" variant="error" @click="deleteProduct(product.id)" />
@@ -69,3 +70,15 @@ getAllProducts();
     </div>
   </div>
 </template>
+
+<style lang="scss">
+@use "@material/button";
+
+.favourite-button {
+  @include button.ink-color(#E1E3E4);
+}
+
+.favourite-button.active {
+  @include button.ink-color(#b5076f8a);
+}
+</style>
