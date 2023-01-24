@@ -5,5 +5,6 @@ export class Product {
         public readonly imageSrc: string,
         public readonly category: string,
         public readonly description: string,
+        public readonly isFavourite: boolean = false,
     ) { }
 }

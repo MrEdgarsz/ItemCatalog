@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Product } from "../models/Product";
+import { Product } from "../models/Product";
 
 export const useProductStore = defineStore('product', {
     state: () => ({
@@ -30,7 +30,27 @@ export const useProductStore = defineStore('product', {
                 }
 
             }
+        },
+        setIsFavourite(id: number, isFavourite: boolean) {
+            const product = this.getProductById(id);
+
+
+            if (product) {
+                const changedProduct = new Product(product.id, product.name, product.imageSrc, product.category, product.description, isFavourite,);
+
+                this.removeProductById(id);
+                this.addProduct(changedProduct);
+                this.products.sort((a) => {
+                    if (a.isFavourite) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                })
+            }
+
         }
+
 
     }
 

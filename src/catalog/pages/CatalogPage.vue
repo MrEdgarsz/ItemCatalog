@@ -8,8 +8,10 @@ import { ProductController } from '../controllers/ProductController';
 import { useProductStore } from '../stores/ProductStore';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/auth/stores/AuthStore';
+import { FavouriteController } from '@/favourites/controllers/FavouriteController';
 
 const productsController = new ProductController();
+const favouritesController = new FavouriteController();
 const productStore = useProductStore();
 const storeRef = storeToRefs(productStore);
 const authState = storeToRefs(useAuthStore());
@@ -28,8 +30,17 @@ async function getAllProducts() {
 async function deleteProduct(id: number) {
   await productsController.delete(id);
 }
+async function setFavourite(id: number) {
+  await favouritesController.setFavourites(id);
+}
+async function getAllFavourites() {
+  if (authState.isAuthenticated.value) {
+    await favouritesController.getAll();
+  }
+}
 
 
+getAllFavourites();
 getAllProducts();
 </script>
 
@@ -45,7 +56,8 @@ getAllProducts();
           <div class="grid grid-cols-2 grid-rows-1" v-if="authState.isAuthenticated.value">
 
             <div class="flex items-center justify-start">
-              <IconButton class="mr-2 " icon="favorite" id="favorite-button" />
+              <IconButton class="mr-2 favourite-button" :class="product.isFavourite ? 'active' : ''" icon="favorite"
+                @click="setFavourite(product.id)" />
             </div>
             <div class="flex items-center justify-end">
               <TextButton class="mr-2" label="Usuń" variant="error" @click="deleteProduct(product.id)" />
@@ -57,3 +69,15 @@ getAllProducts();
     </div>
   </div>
 </template>
+
+<style lang="scss">
+@use "@material/button";
+
+.favourite-button {
+  @include button.ink-color(#E1E3E4);
+}
+
+.favourite-button.active {
+  @include button.ink-color(#b5076f8a);
+}
+</style>

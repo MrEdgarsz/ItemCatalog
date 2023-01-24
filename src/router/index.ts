@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CatalogPage from '../catalog/pages/CatalogPage.vue'
-import FavouritesPage from '../catalog/pages/FavouritesPage.vue'
 import AddOrEditItemPage from '@/catalog/pages/AddOrEditItemPage.vue'
 import LoginPage from '@/auth/pages/LoginPage.vue'
 import RegisterPage from '@/auth/pages/RegisterPage.vue'
 import AuthorsPage from '@/authors/pages/AuthorsPage.vue'
+import FavouritesPage from '@/favourites/pages/FavouritesPage.vue'
 import { useAuthStore } from '@/auth/stores/AuthStore'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
