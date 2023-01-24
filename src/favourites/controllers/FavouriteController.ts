@@ -22,23 +22,24 @@ export class FavouriteController {
 
     async setFavourites(id: number): Promise<Unit> {
         const favouriteStore = useFavouriteStore();
+        const productStore = useProductStore();
         const favourite = favouriteStore.getFavouriteById(id);
-        if (favourite) {
+        if (favourite !== undefined) {
             const response = await this.favourtiteService.unSetFavourite(id);
             if (response._tag == "Right") {
                 favouriteStore.removeFavouriteById(id);
+                productStore.setIsFavourite(id, false);
                 return favouriteStore.favourites;
             } else {
                 return favouriteStore.favourites;
             }
         } else {
-            const productStore = useProductStore();
             const response = await this.favourtiteService.setFavoturite(id);
             if (response._tag == "Right") {
                 const product = productStore.getProductById(id);
                 if (product) {
-
                     favouriteStore.addFavourites(product);
+                    productStore.setIsFavourite(id, true);
                 }
                 return favouriteStore.favourites;
             } else {
