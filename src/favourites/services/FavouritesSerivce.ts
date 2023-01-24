@@ -24,7 +24,7 @@ export class FavouritesService implements FavouritesInterface {
     }
     async setFavoturite(productId: number): Promise<Either<AppException, Unit>> {
         const response = await AxiosClient.instance.post("products/favourites/" + productId);
-        if (response.status === 200) {
+        if (response.status === 201) {
             return right(new Unit());
         } else {
             return left(new ServerError());
