@@ -45,6 +45,15 @@ const router = createRouter({
       name: 'authors',
       component: AuthorsPage,
     },
+    {
+      path: '/logout',
+      name: 'logout',
+      redirect: () => {
+        const authStore = useAuthStore();
+        authStore.logOut();
+        return { name: 'catalog' };
+      }
+    }
   ],
 })
 

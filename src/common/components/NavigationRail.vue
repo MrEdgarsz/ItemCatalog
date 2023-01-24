@@ -1,7 +1,11 @@
 
 <script lang="ts" setup>
-import { HomeIcon, BookOpenIcon, ArrowLeftOnRectangleIcon, UsersIcon, PencilSquareIcon, HeartIcon } from '@heroicons/vue/20/solid'
+import { BookOpenIcon, ArrowLeftOnRectangleIcon, UsersIcon, PencilSquareIcon, HeartIcon } from '@heroicons/vue/20/solid'
 import NavigationItem from './NavigationItem.vue';
+import { useAuthStore } from '@/auth/stores/AuthStore';
+import { storeToRefs } from 'pinia';
+
+const authState = storeToRefs(useAuthStore());
 </script>
 
 <template>
@@ -36,11 +40,11 @@ import NavigationItem from './NavigationItem.vue';
           <UsersIcon />
         </template>
       </NavigationItem>
-      <!-- <NavigationItem title="Ulubione" navigateTo="/test" :selected="true">
+      <NavigationItem title="Wyloguj" navigateTo="/logout" v-if="authState.isAuthenticated.value">
       <template #icon>
-        <BookmarkIcon />
+          <ArrowLeftOnRectangleIcon />
       </template>
-    </NavigationItem> -->
+      </NavigationItem>
 
     </div>
   </div>

@@ -31,5 +31,12 @@ export const useAuthStore = defineStore('auth', {
             }
             this.token = localStorage.getItem('token') as string | null;
         },
+        logOut(){
+            this.token = null;
+            this.expiry = null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('expiry');
+            console.log('Logged out');
+        }
     }
 })
