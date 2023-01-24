@@ -15,35 +15,36 @@ const authState = storeToRefs(useAuthStore());
         <!--- logo -->
         <img src="@/assets/logo.svg" alt="" class="h-10 w-10">
       </div>
+      <NavigationItem title="Logowanie" navigateTo="/login" v-if="!authState.isAuthenticated.value">
+        <template #icon>
+          <ArrowLeftOnRectangleIcon />
+        </template>
+      </NavigationItem>
+      <NavigationItem title="Rejestracja" navigateTo="/register" v-if="!authState.isAuthenticated.value">
+        <template #icon>
+          <PencilSquareIcon />
+        </template>
+      </NavigationItem>
       <NavigationItem title="Katalog" navigateTo="/" :selected="true">
         <template #icon>
           <BookOpenIcon />
         </template>
       </NavigationItem>
-      <NavigationItem title="Ulubione" navigateTo="/favourites">
+      <NavigationItem title="Ulubione" navigateTo="/favourites" v-if="authState.isAuthenticated.value">
         <template #icon>
           <HeartIcon />
         </template>
       </NavigationItem>
-      <NavigationItem title="Logowanie" navigateTo="/login">
-        <template #icon>
-          <ArrowLeftOnRectangleIcon />
-        </template>
-      </NavigationItem>
-      <NavigationItem title="Rejestracja" navigateTo="/register">
-        <template #icon>
-          <PencilSquareIcon />
-        </template>
-      </NavigationItem>
+
       <NavigationItem title="Autorzy" navigateTo="/authors">
         <template #icon>
           <UsersIcon />
         </template>
       </NavigationItem>
       <NavigationItem title="Wyloguj" navigateTo="/logout" v-if="authState.isAuthenticated.value">
-      <template #icon>
+        <template #icon>
           <ArrowLeftOnRectangleIcon />
-      </template>
+        </template>
       </NavigationItem>
 
     </div>

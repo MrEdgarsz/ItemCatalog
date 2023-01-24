@@ -7,12 +7,12 @@ import IconButton from '@/common/components/buttons/IconButton.vue';
 import { ProductController } from '../controllers/ProductController';
 import { useProductStore } from '../stores/ProductStore';
 import { storeToRefs } from 'pinia';
+import { useAuthStore } from '@/auth/stores/AuthStore';
 
 const productsController = new ProductController();
 const productStore = useProductStore();
 const storeRef = storeToRefs(productStore);
-
-
+const authState = storeToRefs(useAuthStore());
 
 function navigateToAddPage() {
   router.push('/add-item');
@@ -35,14 +35,14 @@ getAllProducts();
 
 <template>
   <div class="container bg-background py-8 mx-auto">
-    <div class="text-center">
+    <div class="text-center" v-if="authState.isAuthenticated.value">
       <RaisedButton label="Dodaj nowy produkt" @click="navigateToAddPage" />
     </div>
     <div class="grid grid-cols-4 gap-6 pt-6 phone-landscape:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3">
       <div class="flex justify-center" v-for="product in storeRef.products.value" :key='product.id'>
         <ItemCard class="flex flex-col" :key="product.id" :name="product.name" :type="product.category"
           :description="product.description" :image-src="product.imageSrc">
-          <div class="grid grid-cols-2 grid-rows-1">
+          <div class="grid grid-cols-2 grid-rows-1" v-if="authState.isAuthenticated.value">
 
             <div class="flex items-center justify-start">
               <IconButton class="mr-2 " icon="favorite" id="favorite-button" />
