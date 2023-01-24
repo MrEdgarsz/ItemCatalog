@@ -8,11 +8,13 @@ import { ProductController } from '../controllers/ProductController';
 import { useProductStore } from '../stores/ProductStore';
 import { storeToRefs } from 'pinia';
 import { FavouriteController } from '@/favourites/controllers/FavouriteController';
+import { useAuthStore } from '@/auth/stores/AuthStore';
 
 const productsController = new ProductController();
 const favouritesController = new FavouriteController();
 const productStore = useProductStore();
 const storeRef = storeToRefs(productStore);
+const authStore = useAuthStore();
 
 
 
@@ -33,8 +35,14 @@ async function deleteProduct(id: number) {
 async function setFavourite(id: number) {
   await favouritesController.setFavourites(id);
 }
+async function getAllFavourites() {
+  if (authStore.isAuthenticated) {
+    await favouritesController.getAll();
+  }
+}
 
 
+getAllFavourites();
 getAllProducts();
 </script>
 
