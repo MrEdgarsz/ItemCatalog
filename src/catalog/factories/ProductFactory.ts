@@ -9,6 +9,7 @@ export class ProductFactory {
             dto.image_src,
             dto.category,
             dto.description,
+            dto.isFavourite
         );
     }
 }
