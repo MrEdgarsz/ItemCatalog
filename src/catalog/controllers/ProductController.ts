@@ -1,4 +1,5 @@
 import type { ProductInputDto } from "../models/dtos/ProductInputDto";
+import type { ProductFilterDto } from "../models/dtos/ProductFilterDto";
 import type { Product } from "../models/Product";
 import { ProductsService } from "../services/ProductsService";
 import { useProductStore } from "../stores/ProductStore";
@@ -6,10 +7,16 @@ import { useProductStore } from "../stores/ProductStore";
 export class ProductController {
     constructor(private productsService: ProductsService = new ProductsService()) { }
 
-    async getAll(): Promise<Product[]> {
+    async getAll(productFilterDto?: ProductFilterDto): Promise<Product[]> {
         const productStore = useProductStore();
+        let response;
 
-        const response = await this.productsService.getAll();
+        if (productFilterDto) {
+            response = await this.productsService.getWithFilters(productFilterDto);
+        } else {
+            response = await this.productsService.getAll();
+        }
+
         if (response._tag == "Right") {
             productStore.setProducts(response.right);
             return response.right;
