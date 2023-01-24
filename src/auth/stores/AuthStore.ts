@@ -16,9 +16,26 @@ export const useAuthStore = defineStore('auth', {
     },
     actions: {
         setToken(dto: AuthTokenDto) {
-
             this.token = dto.access_token;
             this.expiry = new Date(dto.expires_at);
+            localStorage.setItem('token', this.token);
+            localStorage.setItem('expiry', this.expiry.toISOString());
+        },
+        loadFromStorage() {
+            const expiry = localStorage.getItem('expiry');
+            if (expiry != null) {
+                this.expiry = new Date(expiry);
+            }
+            else {
+                this.expiry = null;
+            }
+            this.token = localStorage.getItem('token') as string | null;
+        },
+        logOut() {
+            this.token = null;
+            this.expiry = null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('expiry');
 
         }
     }
