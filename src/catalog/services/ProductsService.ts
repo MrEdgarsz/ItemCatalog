@@ -39,10 +39,9 @@ export class ProductsService implements ProductsInterface {
     async addProduct(productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
         const formData = ProductDtoFactory.toFormData(productInputDto);
         const response = await AxiosClient.instance.post<ProductDto>("products", formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
-        if (response.status === 200) {
+        if (response.status === 201) {
             const product: Product = ProductFactory.fromDto(response.data);
             return right(product);
-
         } else if (response.status === 401) {
             return left(new UnauthorizedException());
         } else {
