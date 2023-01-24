@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { useAuthStore } from './auth/stores/AuthStore';
 import NavigationRail from './common/components/NavigationRail.vue';
+
+//try to fetch authState from local storage
+useAuthStore().loadFromStorage();
+
 </script>
 
 <template>
