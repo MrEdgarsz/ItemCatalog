@@ -26,9 +26,8 @@ getAllFavourites();
         <ItemCard class="flex flex-col" :key="favourite.id" :name="favourite.name" :type="favourite.category"
           :description="favourite.description" :image-src="favourite.imageSrc">
           <div class="grid grid-cols-2 grid-rows-1">
-
             <div class="flex items-center justify-start">
-              <IconButton class="mr-2 " icon="favorite" id="favorite-button" @click="setFavourite(favourite.id)" />
+              <IconButton class="mr-2 favorite-button" icon="favorite" @click="setFavourite(favourite.id)" />
             </div>
           </div>
         </ItemCard>
@@ -36,3 +35,11 @@ getAllFavourites();
     </div>
   </div>
 </template>
+
+<style lang="scss">
+@use "@material/button";
+
+.favorite-button {
+  @include button.ink-color(#b5076f8a);
+}
+</style>
