@@ -1,11 +1,11 @@
 
 <script lang="ts" setup>
-import { HomeIcon, BookOpenIcon, ArrowLeftOnRectangleIcon, UsersIcon } from '@heroicons/vue/20/solid'
+import { HomeIcon, BookOpenIcon, ArrowLeftOnRectangleIcon, UsersIcon, PencilSquareIcon, HeartIcon } from '@heroicons/vue/20/solid'
 import NavigationItem from './NavigationItem.vue';
 </script>
 
 <template>
-  <div class=" bg-surface+1 w-32 ">
+  <div class="bg-surface+1 w-32">
     <div class="sticky top-0 flex flex-col items-center content-center  ">
       <div class="p-5 pt-12">
         <!--- logo -->
@@ -16,9 +16,19 @@ import NavigationItem from './NavigationItem.vue';
           <BookOpenIcon />
         </template>
       </NavigationItem>
+      <NavigationItem title="Ulubione" navigateTo="/favourites">
+        <template #icon>
+          <HeartIcon />
+        </template>
+      </NavigationItem>
       <NavigationItem title="Logowanie" navigateTo="/login">
         <template #icon>
           <ArrowLeftOnRectangleIcon />
+        </template>
+      </NavigationItem>
+      <NavigationItem title="Rejestracja" navigateTo="/register">
+        <template #icon>
+          <PencilSquareIcon />
         </template>
       </NavigationItem>
       <NavigationItem title="Autorzy" navigateTo="/authors">

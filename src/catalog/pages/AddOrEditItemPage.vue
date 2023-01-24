@@ -46,7 +46,6 @@ function previewFile(file: File) {
 }
 
 async function saveProduct() {
-    console.log('At saveProduct () isEdit: ', isEdit);
     if (productName.value.length != 0 && productCategory.value.length != 0 && previewSrc.value.length != 0 && description.value.length != 0) {
         const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image: imagefile.value, description: description.value };
         if (isEdit) {
