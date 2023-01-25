@@ -7,11 +7,14 @@ import { ProductFactory } from "../factories/ProductFactory";
 import type { ProductsInterface } from "../interfaces/ProductInterface";
 import type { ProductDto } from "../models/dtos/ProductDto";
 import type { ProductInputDto } from "../models/dtos/ProductInputDto";
+import type { ProductFilterDto } from "../models/dtos/ProductFilterDto";
 import type { Product } from "../models/Product";
 
 export class ProductsService implements ProductsInterface {
-    async getAll(): Promise<Either<AppException, Product[]>> {
-        const response = await AxiosClient.instance.get<Array<ProductDto>>("products");
+    async getAll(productFilterDto?: ProductFilterDto): Promise<Either<AppException, Product[]>> {
+        const response = await AxiosClient.instance.get<Array<ProductDto>>('products', {
+            params: productFilterDto
+        });
 
         if (response.status === 200) {
             const allProducts: Product[] = [];
@@ -23,8 +26,10 @@ export class ProductsService implements ProductsInterface {
             return left(new ServerError());
         }
     }
-    async getProductFavourites(): Promise<Either<AppException, Product[]>> {
-        const response = await AxiosClient.instance.get<Array<ProductDto>>("products/product-favourites");
+    async getProductFavourites(productFilterDto?: ProductFilterDto): Promise<Either<AppException, Product[]>> {
+        const response = await AxiosClient.instance.get<Array<ProductDto>>("products/product-favourites", {
+            params: productFilterDto
+        });
 
         if (response.status === 200) {
             const allProducts: Product[] = [];
@@ -47,7 +52,6 @@ export class ProductsService implements ProductsInterface {
         } else {
             return left(new ServerError());
         }
-
     }
     async patchProduct(id: number, productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
         const formData = ProductDtoFactory.toFormData(productInputDto);
@@ -61,7 +65,6 @@ export class ProductsService implements ProductsInterface {
         } else {
             return left(new ServerError());
         }
-
     }
     async deleteProduct(id: number): Promise<Either<AppException, Unit>> {
         const response = await AxiosClient.instance.delete("products/" + id,)
@@ -72,7 +75,6 @@ export class ProductsService implements ProductsInterface {
         } else {
             return left(new ServerError());
         }
-
     }
 
 

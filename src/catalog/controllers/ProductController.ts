@@ -1,5 +1,6 @@
 import { useAuthStore } from "@/auth/stores/AuthStore";
 import type { ProductInputDto } from "../models/dtos/ProductInputDto";
+import type { ProductFilterDto } from "../models/dtos/ProductFilterDto";
 import type { Product } from "../models/Product";
 import { ProductsService } from "../services/ProductsService";
 import { useProductStore } from "../stores/ProductStore";
@@ -7,14 +8,14 @@ import { useProductStore } from "../stores/ProductStore";
 export class ProductController {
     constructor(private productsService: ProductsService = new ProductsService()) { }
 
-    async getAll(): Promise<Product[]> {
+    async getAll(productFilterDto?: ProductFilterDto): Promise<Product[]> {
         const productStore = useProductStore();
         const authStore = useAuthStore();
         let response;
         if (authStore.isAuthenticated) {
-            response = await this.productsService.getProductFavourites();
+            response = await this.productsService.getProductFavourites(productFilterDto);
         } else {
-            response = await this.productsService.getAll();
+            response = await this.productsService.getAll(productFilterDto);
         }
         if (response._tag == "Right") {
             productStore.setProducts(response.right);
