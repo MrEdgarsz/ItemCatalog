@@ -25,16 +25,8 @@ export class ProductsService implements ProductsInterface {
         }
     }
     async getWithFilters(productFilterDto: ProductFilterDto): Promise<Either<AppException, Product[]>> {
-        const { name, category, sort, order } = productFilterDto;
-        const params = {};
-
-        if (name)       { params.name = name }
-        if (category)   { params.category = category }
-        if (sort)       { params.sort = sort }
-        if (order)      { params.order = order }
-
         const response = await AxiosClient.instance.get<Array<ProductDto>>('products', {
-            params: params
+            params: productFilterDto
         });
 
         if (response.status === 200) {

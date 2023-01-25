@@ -19,6 +19,8 @@ const productCategory = ref('');
 const productSortOption = ref('');
 const productSortBy = ref('');
 const productOrder = ref('');
+const categorySelect = ref(null as null | typeof SelectInput);
+const sortOptionSelect = ref(null as null | typeof SelectInput);
 const productsController = new ProductController();
 const productStore = useProductStore();
 const storeRef = storeToRefs(productStore);
@@ -45,16 +47,16 @@ async function getProductsWithFilters() {
     productSortBy.value = 'created_at'; productOrder.value = 'ASC';
   }
 
-  const dto: ProductFilterDto = { name: productName.value, category: productCategory.value, sort: productSortBy.value, order: productOrder.value };
+  const dto: ProductFilterDto = { name: productName.value, category: productCategory.value, sort: productSortBy.value || undefined, order: productOrder.value || undefined };
   await productsController.getAll(dto);
-  router.push('/');
 }
 async function resetProductFiltering() {
   productName.value = '';
   productCategory.value = '';
   productSortOption.value = '';
+  categorySelect.value!.reset()
+  sortOptionSelect.value!.reset()
   await getAllProducts();
-  router.push('/');
 }
 async function deleteProduct(id: number) {
   await productsController.delete(id);
@@ -71,9 +73,9 @@ getAllProducts();
       <ItemFilter>
         <div class="grid grid-cols-3 gap-6 tablet:grid-cols-1">
           <TextInput v-model="productName" label="Nazwa produktu" />
-          <SelectInput v-model="productCategory" :options="['Książka', 'Gra Planszowa']"
+          <SelectInput ref="categorySelect" v-model="productCategory" :options="['Książka', 'Gra Planszowa']"
                       label="Kategoria produktu" />
-          <SelectInput v-model="productSortOption" :options="['Nazwa: Alfabetycznie', 'Data: Od najnowszych', 'Data: Od najstarszych']"
+          <SelectInput ref="sortOptionSelect" v-model="productSortOption" :options="['Nazwa: Alfabetycznie', 'Data: Od najnowszych', 'Data: Od najstarszych']"
                   label="Sortowanie" />
         </div>
         <TextButton class="mr-2" label="Resetuj" variant="error" @click="resetProductFiltering()" />
