@@ -11,8 +11,10 @@ import type { ProductFilterDto } from "../models/dtos/ProductFilterDto";
 import type { Product } from "../models/Product";
 
 export class ProductsService implements ProductsInterface {
-    async getAll(): Promise<Either<AppException, Product[]>> {
-        const response = await AxiosClient.instance.get<Array<ProductDto>>("products");
+    async getAll(productFilterDto?: ProductFilterDto): Promise<Either<AppException, Product[]>> {
+        const response = await AxiosClient.instance.get<Array<ProductDto>>('products', {
+            params: productFilterDto
+        });
 
         if (response.status === 200) {
             const allProducts: Product[] = [];
@@ -24,17 +26,17 @@ export class ProductsService implements ProductsInterface {
             return left(new ServerError());
         }
     }
-    async getWithFilters(productFilterDto: ProductFilterDto): Promise<Either<AppException, Product[]>> {
-        const response = await AxiosClient.instance.get<Array<ProductDto>>('products', {
+    async getProductFavourites(productFilterDto?: ProductFilterDto): Promise<Either<AppException, Product[]>> {
+        const response = await AxiosClient.instance.get<Array<ProductDto>>("products/product-favourites", {
             params: productFilterDto
         });
 
         if (response.status === 200) {
-            const filteredProducts: Product[] = [];
+            const allProducts: Product[] = [];
             response.data.map((value) => {
-                filteredProducts.push(ProductFactory.fromDto(value))
+                allProducts.push(ProductFactory.fromDto(value))
             });
-            return right(filteredProducts);
+            return right(allProducts);
         } else {
             return left(new ServerError());
         }
@@ -42,7 +44,7 @@ export class ProductsService implements ProductsInterface {
     async addProduct(productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
         const formData = ProductDtoFactory.toFormData(productInputDto);
         const response = await AxiosClient.instance.post<ProductDto>("products", formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
-        if (response.status === 200) {
+        if (response.status === 201) {
             const product: Product = ProductFactory.fromDto(response.data);
             return right(product);
         } else if (response.status === 401) {
@@ -50,7 +52,6 @@ export class ProductsService implements ProductsInterface {
         } else {
             return left(new ServerError());
         }
-
     }
     async patchProduct(id: number, productInputDto: ProductInputDto): Promise<Either<AppException, Product>> {
         const formData = ProductDtoFactory.toFormData(productInputDto);
@@ -64,7 +65,6 @@ export class ProductsService implements ProductsInterface {
         } else {
             return left(new ServerError());
         }
-
     }
     async deleteProduct(id: number): Promise<Either<AppException, Unit>> {
         const response = await AxiosClient.instance.delete("products/" + id,)
@@ -75,7 +75,6 @@ export class ProductsService implements ProductsInterface {
         } else {
             return left(new ServerError());
         }
-
     }
 
 
