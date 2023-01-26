@@ -100,8 +100,7 @@ getAllProducts();
       <div class="flex justify-center" v-for="product in storeRef.products.value" :key='product.id'>
         <ItemCard class="flex flex-col" :key="product.id" :name="product.name" :type="product.category"
           :description="product.description" :image-src="product.imageSrc">
-          <div class="grid grid-cols-2 grid-rows-1">
-
+          <div class="grid grid-cols-2 grid-rows-1" v-if="authState.isAuthenticated.value">
             <div class="flex items-center justify-start">
               <IconButton class="mr-2 favourite-button" :class="product.isFavourite ? 'active' : ''" icon="favorite"
                 @click="setFavourite(product.id)" />
