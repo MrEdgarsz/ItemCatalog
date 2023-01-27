@@ -30,6 +30,14 @@ onMounted(() => {
     });
 });
 
+function reset() {
+    mdcSelect.value!.setSelectedIndex(-1)
+}
+
+defineExpose({
+    reset
+})
+
 
 
 </script>
@@ -57,7 +65,7 @@ onMounted(() => {
         </div>
 
         <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-            <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+            <ul class="mdc-deprecated-list" role="listbox">
 
                 <li class="mdc-deprecated-list-item" :aria-selected="option == props.initialValue" :data-value="option"
                     role="option" v-for="(option, index) in props.options" :key="index"

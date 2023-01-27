@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { MDCTextField } from '@material/textfield';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const textField = ref<Element | null>(null);
 const mdcTextField = ref<MDCTextField | null>(null);
@@ -24,6 +24,10 @@ const props = defineProps({
 
 })
 
+const id = computed(() => {
+    return props.label?.replace(' ', '-').toLowerCase();
+});
+
 onMounted(() => {
 
     mdcTextField.value = new MDCTextField(textField.value!);
@@ -41,10 +45,10 @@ onMounted(() => {
 <template>
     <label class="mdc-text-field mdc-text-field--filled mdc-text-field--label-floating my-3" ref="textField">
         <span class="mdc-text-field__ripple"></span>
-        <span class="mdc-floating-label mdc-floating-label--float-above" id="my-label-id">
+        <span class="mdc-floating-label mdc-floating-label--float-above" :id="id">
             {{ props.label }}
         </span>
-        <input class="mdc-text-field__input" :type="props.inputType" aria-labelledby="my-label-id">
+        <input class="mdc-text-field__input" :type="props.inputType" :value="props.initialValue" :aria-labelledby="id">
         <span class="mdc-line-ripple"></span>
     </label>
 </template>

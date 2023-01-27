@@ -7,37 +7,57 @@ import RaisedButton from '@/common/components/buttons/RaisedButton.vue';
 import ItemCard from '@/catalog/components/ItemCard.vue'
 import { ref } from 'vue';
 import router from '@/router';
-
-const props = defineProps({
-    name: {
-        type: String,
-    },
-    imageSrc: {
-        type: String,
-    },
-    category: {
-        type: String,
-    },
-    description: {
-        type: String,
-    },
-});
+import { useProductStore } from '../stores/ProductStore';
+import { ProductController } from '../controllers/ProductController';
+import type { ProductInputDto } from '../models/dtos/ProductInputDto';
 
 
+const productName = ref('');
+const productCategory = ref('');
+const description = ref('');
+const previewSrc = ref('');
+const imagefile = ref();
+const productStore = useProductStore();
+const productsController = new ProductController();
+let isEdit: boolean = false;
 
-const productName = ref(props.name);
-const productCategory = ref(props.category);
-const description = ref(props.description);
-const previewSrc = ref(props.imageSrc);
 
+if (router.currentRoute.value.fullPath != '/add-item') {
+    isEdit = true;
 
+    const productId = parseInt(router.currentRoute.value.params['productId'].toString());
 
+    const response = productStore.getProductById(productId);
+
+    if (response) {
+        productName.value = response.name;
+        productCategory.value = response.category;
+        description.value = response.description;
+        previewSrc.value = response.imageSrc;
+    }
+}
 
 function previewFile(file: File) {
     if (file != null) {
-        previewSrc.value = URL.createObjectURL(file);
+        const imageSrc = URL.createObjectURL(file)
+        imagefile.value = file
+        previewSrc.value = imageSrc;
     }
+}
 
+async function saveProduct() {
+    if (productName.value.length != 0 && productCategory.value.length != 0 && previewSrc.value.length != 0 && description.value.length != 0) {
+        const dto: ProductInputDto = { name: productName.value, category: productCategory.value, image: imagefile.value, description: description.value };
+        if (isEdit) {
+            const productId = parseInt(router.currentRoute.value.params['productId'].toString());
+            await productsController.patch(productId, dto);
+        } else {
+            await productsController.add(dto);
+        }
+        router.push('/');
+    } else {
+        alert("Wszystkie pola formularza muszą zostać wypełnione!");
+    }
 }
 
 </script>
@@ -61,25 +81,16 @@ function previewFile(file: File) {
             </div>
         </div>
         <div class="grid desktop:grid-cols-4 desktop:gap-1 w-full mt-5">
-            <form class="flex flex-col m-5 desktop:col-span-2 desktop:col-start-2" role="edit" action="" method="post">
-                <TextInput v-model="productName" label="Nazwa produktu" />
+            <form class="flex flex-col m-5 desktop:col-span-2 desktop:col-start-2" role="edit" @submit.prevent="">
+                <TextInput v-model="productName" label="Nazwa produktu" :initial-value="productName" />
                 <FileInput v-model="previewSrc" @input="previewFile" label="Zdjęcie produktu" />
                 <SelectInput v-model="productCategory" :options="['Książka', 'Gra Planszowa']"
-                    label="Kategoria produktu" />
-                <TextArea v-model="description" label="Opis produktu" :max-length="250" />
+                    :initial-value="productCategory" label="Kategoria produktu" />
+                <TextArea v-model="description" label="Opis produktu" :initial-value="description" :max-length="250" />
                 <div class="text-right">
-                    <RaisedButton label="Zapisz" />
+                    <RaisedButton label="Zapisz" @click="saveProduct()" />
                 </div>
             </form>
         </div>
-
     </div>
-
-
-
-
-
-
-
-
 </template>
