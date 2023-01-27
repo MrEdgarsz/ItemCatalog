@@ -1,12 +1,13 @@
 import { useAuthStore } from "@/auth/stores/AuthStore";
 import axios, { AxiosHeaders, type AxiosInstance } from "axios";
+import { AppConfig } from "../Config";
 
 export class AxiosClient {
     private static _instance: AxiosInstance;
 
     private constructor() {
         AxiosClient._instance = axios.create({
-            baseURL: import.meta.env.VITE_BASE_URL,
+            baseURL: AppConfig.API_URL,
             headers: this._createHeaders(),
             validateStatus: (status) => [200,201,400,500,403,401].includes(status),
         });
