@@ -83,7 +83,8 @@ getAllProducts();
   <div class="container bg-background py-8 mx-auto">
     <div class="text-center" v-if="authState.isAuthenticated.value">
       <RaisedButton label="Dodaj nowy produkt" @click="navigateToAddPage" />
-      <br/>
+    </div>
+    <div class="text-center">
       <ItemFilter>
         <div class="grid grid-cols-3 gap-6 tablet:grid-cols-1">
           <TextInput v-model="productName" label="Nazwa produktu" />
